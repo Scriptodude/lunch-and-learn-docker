@@ -1,0 +1,9 @@
+[package]
+name = "full-stack-app-docker"
+version = "0.1.0"
+authors = ["Jonathan Lavigne"]
+edition = "2020"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]

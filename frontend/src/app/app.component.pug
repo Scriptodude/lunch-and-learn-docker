@@ -1,0 +1,13 @@
+html
+  nav.navbar.navbar-light.bg-light
+    a.navbar-brand([routerLink]="['/']", (click)="setContent(null)")
+      img.logo(src="https://techso.ca/wp-content/themes/techso/img/logo-techso.svg")
+    ul.nav
+      li.nav-item(*ngFor="let item of items")
+        a.nav-link(
+          href="#",
+          [class.active]="item.isActive",
+          innerHTML="{{item.text}}",
+          (click)="item.onClick()")
+  .d-flex.justify-content-center
+    p.badge.badge-pill.badge-primary {{content}}
