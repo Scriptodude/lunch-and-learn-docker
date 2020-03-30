@@ -1,5 +1,5 @@
 [package]
-name = "full-stack-app-docker"
+name = "backend"
 version = "0.1.0"
 authors = ["Jonathan Lavigne"]
 edition = "2018"

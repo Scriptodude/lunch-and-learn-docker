@@ -9,7 +9,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .configure(greet::configure)
     })
-        .bind("127.0.0.1:8000")?
+        .bind(":8000")?
         .run()
         .await
 }
