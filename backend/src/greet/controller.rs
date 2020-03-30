@@ -6,8 +6,8 @@ use super::dao::users;
 #[get("/user/{id}/{name}")]
 pub async fn greet_name_id(user: web::Path<(usize, String)>) -> impl Responder {
     HttpResponse::Ok().body(greet_user(&UserInfo{
-        name: user.0.to_string(),
-        id: user.1
+        id: user.0,
+        name: user.1.to_string()
     }))
 }
 

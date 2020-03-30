@@ -1,26 +1,31 @@
 use std::vec::Vec;
+use mysql::prelude::Queryable;
 
+use crate::database;
 use super::models::UserInfo;
 
 pub fn get_all_users() -> Vec<UserInfo> {
-    return vec!(
-        UserInfo{
-            id: 0,
-            name: "Jonathan".to_string()
-        },
-        UserInfo{
-            id: 1,
-            name: "François".to_string()
-        },
-        UserInfo{
-            id: 2,
-            name: "Guillaume".to_string()
-        },
-        UserInfo{
-            id: 3,
-            name: "Carl".to_string()
+    let mut conn = match database::get_connection() {
+        Ok(conn) => conn,
+        Err(e) => {
+            println!("{}", e);
+            return vec!();
         }
-    )
+    };
+
+    return match conn
+        .query_map(
+            "SELECT id, fullname FROM users",
+            |(id, fullname)| {
+                UserInfo { id, name: fullname }
+            }
+        ) {
+        Ok(v) => v,
+        Err(e) => {
+            println!("{}", e);
+            return vec!();
+        }
+    }
 }
 
 pub fn get_user_by_id(id: usize) -> UserInfo {
