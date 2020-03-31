@@ -1,0 +1,11 @@
+html
+  nav.navbar.navbar-light.bg-light
+    a.navbar-brand([routerLink]="['/']")
+      img.logo(src="https://techso.ca/wp-content/themes/techso/img/logo-techso.svg")
+    ul.nav
+      li.nav-item(*ngFor="let item of items")
+        a.nav-link(
+          href="#",
+          [routerLink]="[item.link ? item.link : null]",
+          [class.active]="item.isActive",
+          ) {{item.text}}

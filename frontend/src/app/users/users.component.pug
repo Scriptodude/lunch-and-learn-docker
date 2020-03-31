@@ -1,0 +1,12 @@
+app-nav
+.d-flex.justify-content-center
+  .row
+    .col-md-4nav
+      .row
+        label(for="name") Veuillez entrer un nom:
+      .row
+        input#name(#name, type="text", name="val-name")
+      .row
+        button((click)="fetchUser()") Chercher
+      .row
+        p(#result)
