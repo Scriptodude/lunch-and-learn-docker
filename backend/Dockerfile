@@ -1,5 +1,9 @@
+# Launch using
+# docker run --rm -d -p '127.0.0.1:8000':8000 -e SQL_HOST=mysql_techso -e SQL_PORT=3306 --network fullstack --name backend lunch_and_learn:backend
+
 FROM rust:1.40 as builder
 MAINTAINER Jonathan Lavigne - jlavigne@techso.com
+
 
 WORKDIR /usr/src/backend
 COPY . .

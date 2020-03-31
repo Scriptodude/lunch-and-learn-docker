@@ -19,14 +19,17 @@ dump_cmd="mysql -u root -p$password < $dump_dest"
 # Nom du network auquel se connecter
 network_name="fullstack"
 
+# Nom du conteneur docker
+container_name="mysql_techso"
+
 # Step 1 - Construire le docker network
 docker network rm "$network_name" || true
 docker network create "$network_name"
 
 # Step 2 - Construire l'image docker
-docker container rm mysql_techso -f || true
+docker container rm "$container_name" -f || true
 docker run \
-  --name mysql_techso \
+  --name "$container_name" \
   -e MYSQL_ROOT_PASSWORD="$password" \
   -e LANG=C.UTF-8 \
   --network "$network_name" \
@@ -36,13 +39,14 @@ docker run \
 
 # Step 3 - Add the migration script
 echo "Copie en cours..."
-docker cp "$SCRIPTDIR/dump.sql" mysql_techso:"$dump_dest";
+docker cp "$SCRIPTDIR/dump.sql" "$container_name":"$dump_dest";
 
 echo "exécution du dump '$dump_cmd'"
-until docker exec mysql_techso sh -c "$dump_cmd"
+until docker exec "$container_name" sh -c "$dump_cmd"
 do
   echo "Tentative échouée, nouvelle tentative dans 5 secondes...";
   sleep 5
 done
 
+echo "Succès !"
 # Step 4 - Profit
