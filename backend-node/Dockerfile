@@ -1,5 +1,5 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:10-slim
+# TODO
 
 # Set to a non-root built-in user `node`
 USER node
@@ -14,15 +14,19 @@ WORKDIR /home/node/app
 # where available (npm@5+)
 COPY --chown=node package*.json ./
 
-RUN npm install
+# Install the modules
+# TODO
 
 # Bundle app source code
 COPY --chown=node . .
 
-RUN npm run build
+# Build the app
+# TODO
 
 # Bind to all network interfaces so that it can be mapped to the host OS
 ENV HOST=0.0.0.0 PORT=8000
 
 EXPOSE ${PORT}
-CMD [ "node", "." ]
+
+# Run the app
+# TODO
