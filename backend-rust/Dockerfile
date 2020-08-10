@@ -4,7 +4,6 @@
 FROM rust:1.40 as builder
 MAINTAINER Jonathan Lavigne - jlavigne@techso.com
 
-
 WORKDIR /usr/src/backend
 COPY . .
 RUN cargo install --path .
