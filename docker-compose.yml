@@ -1,0 +1,21 @@
+version: "3"
+services:
+  backend:
+    container_name: "backend-rust"
+    build: ./backend-rust
+    ports:
+      - "127.0.0.1:8000:8000"
+    image: "lunch_and_learn:backend"
+    environment:
+      - SQL_HOST=mysql_techso
+      - SQL_PORT=3306
+  mariadb:
+    container_name: "mysql_techso"
+    ports:
+      - "127.0.0.1:1337:3306"
+    environment:
+      - LANG=C.UTF-8
+      - MYSQL_ROOT_PASSWORD=root
+    image: "mariadb:latest"
+    volumes:
+      - ${PWD}/database/data:/var/lib/mysql
